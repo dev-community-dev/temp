@@ -1,0 +1,26 @@
+{
+    "balance_sheet": {
+        "consolidated": [
+            185
+        ],
+        "standalone": [
+            123
+        ]
+    },
+    "pnl": {
+        "consolidated": [
+            186
+        ],
+        "standalone": [
+            124
+        ]
+    },
+    "cash_flow": {
+        "consolidated": [
+            188
+        ],
+        "standalone": [
+            126
+        ]
+    }
+}
