@@ -1,16 +1,16 @@
-# Finimyze — Why `in-ca` Tags Matter (Ind AS XBRL)
+# `in-ca` Tags 
 
 ## TL;DR
 - **`ind-as:*`** concepts carry the **financial statement numbers** (P&L, BS, CF).
 - **`in-ca:*`** concepts carry **India/MCA/Companies-Act context + disclosures + entity metadata**.
-- For Finimyze, `in-ca` is **not the valuation math**, but it is often **required to interpret, trust, and present the math correctly**—especially for **professional/enterprise** tiers.
+- `in-ca` is **not the valuation math**, but it is often **required to interpret, trust, and present the math correctly**—especially for **professional/enterprise** tiers.
 
 ---
 
-## What `in-ca` gives Finimyze
+## What `in-ca` gives
+
 ### 1) Correct interpretation of extracted numbers (often *required*)
 `in-ca` provides the context needed to avoid silent valuation mistakes:
-- **Standalone vs Consolidated** classification (changes entity scope, cashflows, leverage, comparables).
 - **Reporting currency** and **rounding level** (₹ vs other currency; lakhs/crores; impacts scaling).
 - **Reporting period boundaries** (FY start/end, audit sign date) for time-series comparisons and trailing metrics.
 - **Cashflow method** indicator (direct/indirect presentation differences; affects parsing/rendering).
@@ -38,17 +38,17 @@ Common high-signal disclosures in `in-ca`:
 
 ---
 
-## Minimal `in-ca` tag groups to support (recommended v1)
+## Minimal `in-ca` tag groups to support
 > Not comprehensive—just the high-impact items.
 
 ### A) Entity identity & classification
-Use for company profile, filtering, peer comparisons:
+Use for company profile, filtering, and peer comparisons:
 - `in-ca:CorporateIdentityNumber`
 - `in-ca:PermanentAccountNumberOfEntity`
 - `in-ca:WhetherCompanyIsListed`
 - `in-ca:NatureOfReportStandaloneOrConsolidated`
 
-### B) Reporting basis (currency / rounding / dates)
+### B) Reporting basis (currency/rounding/dates)
 Use for scaling and time-series correctness:
 - `in-ca:ReportingCurrency`
 - `in-ca:LevelOfRoundingUsedInFinancialStatements`
@@ -72,8 +72,6 @@ Use for risk scoring + memo:
 Use for risk profile and “plain-English” summaries:
 - `in-ca:DomesticTurnoverGoodsGross`
 - `in-ca:ExportTurnoverGoodsGross`
-- `in-ca:DomesticTurnoverServicesGross` *(if present)*
-- `in-ca:ExportTurnoverServicesGross` *(if present)*
 - Related party transaction concepts (RPT amounts / outstanding balances) *(exact names vary by filing)*
 
 ### F) Capital actions (optional but valuable)
@@ -82,37 +80,7 @@ Use for memo + shareholder yield narratives:
 
 ---
 
-## What `in-ca` is **not** needed for (safe to deprioritize)
-These typically add little valuation value:
+## What `in-ca` is **not** needed for
+These typically add little value:
 - Filing logistics (SRN, registry filing IDs, software used to prepare XBRL).
 - Pure document identifiers or signature blocks that don’t add analytical meaning.
-
----
-
-## How this aligns with Finimyze goals
-### Free tier (simpler UI)
-`in-ca` supports “explainable” pages:
-- **Company identity & report type**
-- **Business exposure (domestic/export)**
-- **Governance/assurance snapshots**
-
-### Paid tier (professional analysis)
-`in-ca` enables:
-- **accurate comparables (scope + scaling)**
-- **audit trail (metadata + signing)**
-- **risk overlays (RPT, export exposure)**
-
-### Enterprise tier (controls + compliance)
-`in-ca` supports:
-- **standardized ingestion and validation gates**
-- **traceability (“where did this come from?”)**
-- **repeatable reporting across filings**
-
----
-
-## Practical implementation note
-- Store `in-ca` facts in a separate **Entity/Disclosure** bucket in your canonical model.
-- Use `in-ca` primarily for:
-  - **scaling rules**, **scope selection**, **risk scoring**, and **memo generation**.
-- Keep your valuation math on canonical metrics derived mostly from `ind-as`, with `in-ca` as the **context layer**.
-
